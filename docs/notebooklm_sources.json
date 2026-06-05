@@ -1,0 +1,51 @@
+{
+  "1. Java 核心": [
+    { "id": "01522afe-2d7a-423c-bf8c-6004dc076e42", "title": "Java 代理模式详解\n\n| JavaGuide" },
+    { "id": "3147483e-d1ee-4b2d-a83c-a6d619f8dce5", "title": "Java 值传递详解\n\n| JavaGuide" },
+    { "id": "e7731eab-4d61-475a-a520-19ae109fafb2", "title": "Java 反射机制详解\n\n| JavaGuide" },
+    { "id": "bcaee8aa-79ad-4e67-8388-b2698372f8f4", "title": "Java 基础专题：语法、面向对象、泛型、反射、代理与序列化\n\n| JavaGuide" },
+    { "id": "0ba96412-3838-4de7-bd67-ad2a0f8bc18d", "title": "Java 序列化详解\n\n| JavaGuide" },
+    { "id": "e15effc4-cbaf-4b7b-b885-fb06bd820807", "title": "Java基础常见面试题总结(上) | JavaGuide" },
+    { "id": "a50b3086-d85c-4050-8aff-4bb7b475c1ad", "title": "Java基础常见面试题总结(下) | JavaGuide" },
+    { "id": "14ab276f-53cc-4c3a-852f-e0d81d14a8af", "title": "Java基础常见面试题总结(中) | JavaGuide" }
+  ],
+  "2. Spring 与 AOP": [
+    { "id": "95965a9e-f5ab-4faf-a423-08a85639b85b", "title": "MyBatis常见面试题总结\n\n| JavaGuide" },
+    { "id": "7a09247b-50a1-4046-8054-38c750bd5984", "title": "Spring 中的设计模式详解\n\n| JavaGuide" },
+    { "id": "2dc6cf70-23d8-44cd-bbef-af4f2b63ca97", "title": "Spring 事务详解\n\n| JavaGuide" },
+    { "id": "a6479241-dd3f-424e-969d-4831210743dd", "title": "Spring&SpringMVC&SpringBoot常用注解总结\n\n| JavaGuide" },
+    { "id": "21e98345-4dcb-4c17-a398-2561b6b3f34a", "title": "Spring常见面试题总结\n\n| JavaGuide" }
+  ],
+  "3. Redis 与缓存": [
+    { "id": "b8d138b4-3adc-49b2-a5e8-53f7ef426557", "title": "3种常用的缓存读写策略详解\n\n| JavaGuide" },
+    { "id": "b1727ab1-1f43-40af-908f-80c9e4c360ff", "title": "Redis内存碎片详解\n\n| JavaGuide" },
+    { "id": "c29879a3-462c-40e0-a13e-0c6dbabb11b2", "title": "Redis常见面试题总结(上) | JavaGuide" },
+    { "id": "e563d088-0530-4312-a33b-a528b4b133c2", "title": "Redis常见面试题总结(下) | JavaGuide" },
+    { "id": "3a480656-7f41-4e33-9a6e-3f40f2816dbf", "title": "分布式锁入门：为什么需要分布式锁、锁粒度、超时续约与应用场景\n\n| JavaGuide" }
+  ],
+  "4. MySQL 与数据库": [
+    { "id": "f734b7fb-d6bf-4f27-a12c-4c139289f32c", "title": "JavaGuide" },
+    { "id": "4e87ead6-53f0-4517-a634-e55312b7f833", "title": "MySQL三大日志(binlog、redo log和undo log)详解| JavaGuide" },
+    { "id": "5f0db8ef-58d5-4c25-b13a-207ab5e5c631", "title": "MySQL事务隔离级别详解 | JavaGuide" },
+    { "id": "c02b5223-561f-4a02-b74e-d1fccafc6f3a", "title": "MySQL常见面试题总结\n\n| JavaGuide" },
+    { "id": "5fbad47f-1934-48d8-bd84-0c406e0cb080", "title": "MySQL索引详解\n\n| JavaGuide" }
+  ],
+  "5. AI Agent 架构": [
+    { "id": "fc670f76-c58e-48af-ac7c-b999f1e2105c", "title": "AI Agent 核心概念：Agent Loop、Context Engineering、Tools 注册| JavaGuide" },
+    { "id": "7a9ccd54-8879-4015-ac5c-e0d2a7a28904", "title": "AI Agent 记忆系统：短期记忆、长期记忆与记忆演化机制 | JavaGuide" },
+    { "id": "db4f9b6a-0396-4d14-99ff-366f5b213ceb", "title": "AI Agent 面试题总结\n\n| JavaGuide" },
+    { "id": "b0dc0172-5b8b-410f-beba-8bb800e9e292", "title": "AI 应用系统设计：从 Prompt Demo 到生产级架构\n\n| JavaGuide" },
+    { "id": "f35e91d1-83c5-492d-9550-aef3fd67692d", "title": "上下文工程(Context Engineering) 是什么？和 Prompt Engineering 有什么区别？ | JavaGuide" },
+    { "id": "20da927a-2401-4bf8-8882-2c424d8bc9b1", "title": "什么是 Model Context Protocol (MCP)？和 Function Calling、Agent 什么关系？ | JavaGuide" },
+    { "id": "a808f793-1bc1-4d1f-9c1f-0d11fce4871e", "title": "大模型基础面试题总结\n\n| JavaGuide" },
+    { "id": "a265b402-9112-4f5d-b685-b3b87ef8f792", "title": "大模型提示词工程（Prompt Engineering）是什么？提示词技巧有哪些？ | JavaGuide" }
+  ],
+  "6. RAG 检索架构": [
+    { "id": "24a5a865-a505-4bb5-8ee4-91a2c9f3ea95", "title": "RAG 文档处理与切分策略：从解析、清洗、Chunking 到多模态内容处理\n\n| JavaGuide" },
+    { "id": "d863f2a9-1493-4ade-bbb1-b6f5cbdf7bdb", "title": "RAG 知识库文档如何更新：增量更新、版本控制、去重与全量重建\n\n| JavaGuide" },
+    { "id": "a2bd22c9-9e91-4d4b-8015-eab2ff8893af", "title": "RAG 面试题总结\n\n| JavaGuide" },
+    { "id": "55eed1a1-7899-4e43-9fbd-5b0e0d05b5ba", "title": "万字详解 RAG 优化：从召回、重排到上下文工程的系统调优\n\n| JavaGuide" },
+    { "id": "7a789a09-e468-429f-bd28-c12b745b15e7", "title": "万字详解 RAG 向量索引算法和向量数据库\n\n| JavaGuide" },
+    { "id": "4b54771f-ac95-44a0-91e9-a5dec8e21196", "title": "万字详解 RAG 基础概念" }
+  ]
+}
