@@ -10,6 +10,8 @@ interface CardStats {
   lastGrilled: string | null;
   score: number;
   filePath: string;
+  priority: number;
+  lastGrillScore: number;
 }
 
 interface RecommendationListProps {
@@ -290,6 +292,24 @@ export default function RecommendationList({ cards }: RecommendationListProps) {
                       >
                         {status.label}
                       </div>
+
+                      {card.lastGrillScore > 0 && (
+                        <div 
+                          style={{
+                            fontSize: '0.64rem',
+                            padding: '1px 6px',
+                            borderRadius: '3px',
+                            background: 'rgba(0, 243, 255, 0.12)',
+                            color: 'var(--accent-cyan)',
+                            border: '1px solid rgba(0, 243, 255, 0.25)',
+                            fontWeight: 800,
+                            letterSpacing: '0.04em',
+                            fontFamily: 'var(--font-sans)'
+                          }}
+                        >
+                          得分: {card.lastGrillScore}
+                        </div>
+                      )}
                     </div>
                   </div>
                   

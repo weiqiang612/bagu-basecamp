@@ -23,6 +23,8 @@ interface CardStats {
   lastGrilled: string | null;
   score: number;
   filePath: string;
+  priority: number;
+  lastGrillScore: number;
 }
 
 interface RadarData {
@@ -33,13 +35,16 @@ interface RadarData {
 }
 
 // Interview sprint decay formula (2-3 weeks): Max(0, BaseScore - (Today - last_grilled) * 15)
-function calculateScore(grillCount: number, lastGrilled: string | null): number {
+function calculateScore(grillCount: number, lastGrilled: string | null, lastGrillScore: number): number {
   if (grillCount === 0 || !lastGrilled) return 0;
   
-  let baseScore = 0;
-  if (grillCount === 1) baseScore = 40;
-  else if (grillCount === 2) baseScore = 70;
-  else if (grillCount >= 3) baseScore = 100;
+  // 优先使用真实的最近一次问答得分，否则按照次数做兜底基础分
+  let baseScore = lastGrillScore > 0 ? lastGrillScore : 0;
+  if (baseScore === 0) {
+    if (grillCount === 1) baseScore = 40;
+    else if (grillCount === 2) baseScore = 70;
+    else if (grillCount >= 3) baseScore = 100;
+  }
 
   // Align dates ignoring time zones to prevent timezone discrepancy
   const today = new Date();
@@ -107,6 +112,8 @@ export async function GET(request: Request) {
               lastGrilled: string | null;
               score: number;
               filePath: string;
+              priority: number;
+              lastGrillScore: number;
               sourceId?: string;
               sourceTitle?: string;
               matched: boolean;
@@ -126,7 +133,11 @@ export async function GET(request: Request) {
                 const { data } = matter(fileContent);
                 const grillCount = parseInt(data.grill_count) || 0;
                 const lastGrilled = data.last_grilled || null;
-                const score = calculateScore(grillCount, lastGrilled);
+                const lastGrillScore = parseInt(data.last_grill_score) || 0;
+                const score = calculateScore(grillCount, lastGrilled, lastGrillScore);
+                
+                let priority = parseInt(data.priority) || 3;
+                if (priority < 1 || priority > 3) priority = 3;
 
                 localCards.push({
                   title: file.replace('.md', ''),
@@ -134,6 +145,8 @@ export async function GET(request: Request) {
                   lastGrilled,
                   score,
                   filePath,
+                  priority,
+                  lastGrillScore,
                   sourceId: data.source_id || undefined,
                   sourceTitle: data.source_title || undefined,
                   matched: false
@@ -193,7 +206,9 @@ export async function GET(request: Request) {
                   grillCount: match.grillCount,
                   lastGrilled: match.lastGrilled,
                   score: match.score,
-                  filePath: match.filePath
+                  filePath: match.filePath,
+                  priority: match.priority,
+                  lastGrillScore: match.lastGrillScore
                 });
               } else {
                 // Source is NOT yet generated in local Obsidian
@@ -215,7 +230,9 @@ export async function GET(request: Request) {
                   grillCount: 0,
                   lastGrilled: null,
                   score: 0,
-                  filePath: '' // Empty string triggers WEAVE action in UI
+                  filePath: '', // Empty string triggers WEAVE action in UI
+                  priority: 3,
+                  lastGrillScore: 0
                 });
               }
             }
@@ -248,7 +265,9 @@ export async function GET(request: Request) {
                 grillCount: extraCard.grillCount,
                 lastGrilled: extraCard.lastGrilled,
                 score: extraCard.score,
-                filePath: extraCard.filePath
+                filePath: extraCard.filePath,
+                priority: extraCard.priority,
+                lastGrillScore: extraCard.lastGrillScore
               });
             }
           }
@@ -296,21 +315,29 @@ export async function GET(request: Request) {
       };
     });
 
-    // Sort all cards by lowest score first for targeted study recommendations
+    // Sort all cards by highest comprehensive review index first
     const recommendations = allCards
       .filter(card => card.filePath !== '') // Only recommend cards that exist locally
       .sort((a, b) => {
-        if (a.score !== b.score) return a.score - b.score;
-        // Prioritize ungrilled cards
+        // Calculate Comprehensive Review Index: (4 - priority) * (100 - score)
+        const indexA = (4 - a.priority) * (100 - a.score);
+        const indexB = (4 - b.priority) * (100 - b.score);
+
+        if (indexA !== indexB) {
+          return indexB - indexA; // Sort in descending order (highest index first)
+        }
+
+        // Prioritize ungrilled cards if indexes are equal
         if (!a.lastGrilled && b.lastGrilled) return -1;
         if (a.lastGrilled && !b.lastGrilled) return 1;
-        // Prioritize older last_grilled date
+
+        // Prioritize older last_grilled date if indexes are equal
         if (a.lastGrilled && b.lastGrilled) {
           return new Date(a.lastGrilled).getTime() - new Date(b.lastGrilled).getTime();
         }
         return 0;
       })
-      .slice(0, 6); // returns up to 6 study recommendations
+      ; // returns all study recommendations
 
     return NextResponse.json({
       totalCards: totalCardsCount,

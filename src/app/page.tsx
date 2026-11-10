@@ -26,6 +26,8 @@ interface CardStats {
   lastGrilled: string | null;
   score: number;
   filePath: string;
+  priority: number;
+  lastGrillScore: number;
 }
 
 interface ProgressData {
@@ -167,11 +169,11 @@ export default function Home() {
         </div>
 
         {/* RIGHT COLUMN */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '800px' }}>
-          
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', height: '840px' }}>
+
           <OverallProgress reviewedCards={data.reviewedCards} totalCards={data.totalCards} />
-          
-          <div style={{ height: '740px' }}>
+
+          <div style={{ flex: 1, minHeight: 0 }}>
             <RecommendationList cards={data.recommendations} />
           </div>
         </div>
